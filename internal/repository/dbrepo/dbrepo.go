@@ -2,6 +2,7 @@ package dbrepo
 
 import (
 	"database/sql"
+
 	"github.com/tijanadmi/go_bookings/internal/config"
 	"github.com/tijanadmi/go_bookings/internal/repository"
 )
