@@ -540,7 +540,7 @@ func (m *postgresDBRepo) InsertBlockForRoom(id int, startDate time.Time) error {
 }
 
 // DeleteBlockByID deletes a room restriction
-/*func (m *postgresDBRepo) DeleteBlockByID(id int) error {
+func (m *postgresDBRepo) DeleteBlockByID(id int) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
@@ -553,4 +553,4 @@ func (m *postgresDBRepo) InsertBlockForRoom(id int, startDate time.Time) error {
 	}
 	return nil
 }
-*/
+

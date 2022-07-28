@@ -14,7 +14,9 @@ import (
 	"github.com/tijanadmi/go_bookings/internal/models"
 )
 
-var functions = template.FuncMap{}
+var functions = template.FuncMap{
+	"humanDate": HumanDate,
+}
 
 var app *config.AppConfig
 
