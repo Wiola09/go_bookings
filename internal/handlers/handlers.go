@@ -690,7 +690,7 @@ func (m *Repository) AdminReservationsCalendar(w http.ResponseWriter, r *http.Re
 	intMap := make(map[string]int)
 	intMap["days_in_month"] = lastOfMonth.Day()
 
-	rooms, err := m.DB.AllRooms()
+	/*rooms, err := m.DB.AllRooms()
 	if err != nil {
 		helpers.ServerError(w, err)
 		return
@@ -730,12 +730,12 @@ func (m *Repository) AdminReservationsCalendar(w http.ResponseWriter, r *http.Re
 		data[fmt.Sprintf("block_map_%d", x.ID)] = blockMap
 
 		m.App.Session.Put(r.Context(), fmt.Sprintf("block_map_%d", x.ID), blockMap)
-	}
+	}*/
 
 	render.Template(w, r, "admin-reservations-calendar.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
-		Data:      data,
-		IntMap:    intMap,
+		/*Data:      data,
+		IntMap:    intMap,*/
 	})
 }
 
