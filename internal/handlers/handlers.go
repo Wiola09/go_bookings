@@ -657,13 +657,13 @@ func (m *Repository) AdminReservationsCalendar(w http.ResponseWriter, r *http.Re
 	if r.URL.Query().Get("y") != "" {
 		year, _ := strconv.Atoi(r.URL.Query().Get("y"))
 		month, _ := strconv.Atoi(r.URL.Query().Get("m"))
-		now = time.Date(year, time.Month(month), 1, 0, 0, 0, 0, time.UTC)
+		now = time.Date(year, time.Month(month), 1, 0, 0, 0, 0, time.UTC) //variable that contains year, month, 1-any day in that month, 0-hour, 0-minute, 0-second, 0-nanosecond, time.UTC - location
 	}
 
 	data := make(map[string]interface{})
 	data["now"] = now
 
-	next := now.AddDate(0, 1, 0)
+	next := now.AddDate(0, 1, 0) // 0-number of years we wont to add, 1-number of months we wont to add, 0-number of days we wont to add
 	last := now.AddDate(0, -1, 0)
 
 	nextMonth := next.Format("01")
@@ -685,12 +685,12 @@ func (m *Repository) AdminReservationsCalendar(w http.ResponseWriter, r *http.Re
 	currentYear, currentMonth, _ := now.Date()
 	currentLocation := now.Location()
 	firstOfMonth := time.Date(currentYear, currentMonth, 1, 0, 0, 0, 0, currentLocation)
-	lastOfMonth := firstOfMonth.AddDate(0, 1, -1)
+	lastOfMonth := firstOfMonth.AddDate(0, 1, -1) // add 0-year, 1-month, -1 take one day off the current month
 
 	intMap := make(map[string]int)
 	intMap["days_in_month"] = lastOfMonth.Day()
 
-	/*rooms, err := m.DB.AllRooms()
+	rooms, err := m.DB.AllRooms()
 	if err != nil {
 		helpers.ServerError(w, err)
 		return
@@ -730,12 +730,12 @@ func (m *Repository) AdminReservationsCalendar(w http.ResponseWriter, r *http.Re
 		data[fmt.Sprintf("block_map_%d", x.ID)] = blockMap
 
 		m.App.Session.Put(r.Context(), fmt.Sprintf("block_map_%d", x.ID), blockMap)
-	}*/
+	}
 
 	render.Template(w, r, "admin-reservations-calendar.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
-		/*Data:      data,
-		IntMap:    intMap,*/
+		Data:      data,
+		IntMap:    intMap,
 	})
 }
 
