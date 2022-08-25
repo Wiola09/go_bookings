@@ -720,11 +720,16 @@ func (m *Repository) AdminReservationsCalendar(w http.ResponseWriter, r *http.Re
 				// it's a reservation
 				for d := y.StartDate; !d.After(y.EndDate); d = d.AddDate(0, 0, 1) {
 					reservationMap[d.Format("2006-01-2")] = y.ReservationID
+					fmt.Printf("ROOM_ID=%d, Reservation value=%d For day=%s ", x.ID, reservationMap[d.Format("2006-01-2")], y.StartDate.Format("2006-01-2"))
+					fmt.Println()
 				}
 			} else {
 				// it's a block
 				blockMap[y.StartDate.Format("2006-01-2")] = y.ID
+				fmt.Printf("ROOM_ID=%d, Blocked value=%d For day=%s ", x.ID, blockMap[y.StartDate.Format("2006-01-2")], y.StartDate.Format("2006-01-2"))
+				fmt.Println()
 			}
+
 		}
 		data[fmt.Sprintf("reservation_map_%d", x.ID)] = reservationMap
 		data[fmt.Sprintf("block_map_%d", x.ID)] = blockMap
